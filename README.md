@@ -25,19 +25,14 @@ No Open Bin Installer Manager
 Comandi:
 
 - nim install
-   Installa (di default per questo utente)
-- nim install --user
-   Installa per questo utente
-- nim install --all
-   Installa per tutti gli utenti
+   Installa
 - nim escape
    Esci
 
 >>
 ```
 
-Usate il comando per installarlo come volete. Potete installarlo solo per l'utente, se non volete installare per gli altri, oppure per tutti gli utenti, se lo volete condividere.
-Per iniziare, installatelo per l'utente.
+Installate con `nim install`.
 
 Poi, quando avete finito l'installazione, digitate `nim escape`.
 
