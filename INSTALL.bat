@@ -21,12 +21,6 @@ echo.
 powershell -Command "Write-Host '- nim install' -ForegroundColor Yellow"
 echo    Installa (di default per questo utente)
 
-powershell -Command "Write-Host '- nim install --user' -ForegroundColor Yellow"
-echo    Installa per questo utente
-
-powershell -Command "Write-Host '- nim install --all' -ForegroundColor Yellow"
-echo    Installa per tutti gli utenti
-
 powershell -Command "Write-Host '- nim escape' -ForegroundColor Yellow"
 echo    Esci
 
@@ -34,11 +28,11 @@ echo.
 set /p "PROMPT=>>"
 
 if "%PROMPT%"=="nim install" goto install_user
-if "%PROMPT%"=="nim install --user" goto install_user
-if "%PROMPT%"=="nim install --all" goto install_all
 if "%PROMPT%"=="nim escape" exit /b
 
 goto main
+
+:: INSTALLAZIONE
 
 :install_user
 set "INSTDIR=%LOCALAPPDATA%\NoOpenBin"
@@ -88,60 +82,3 @@ echo Riavvia il terminale per usare il comando.
 pause
 goto main
 
-
-
-:install_all
-set "INSTDIR=C:\Program Files\NoOpenBin"
-set "INSTURL=https://github.com/DeMENIGECO/NoOpenBin/raw/refs/heads/main/bin/nob_v1.0.0_windows-64.zip"
-
-echo.
-echo Installazione NoOpenBin per tutti gli utenti...
-
-:: Controllo amministratore
-net session >nul 2>&1
-if %errorlevel% neq 0 (
-    echo Richiesta privilegi amministratore...
-    powershell -Command "Start-Process '%~f0' -Verb RunAs"
-    exit /b
-)
-
-:: Cache temporanea
-set "TMPZIP=%TEMP%\nob_install.zip"
-
-echo Download archivio...
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-"$ProgressPreference='SilentlyContinue'; Invoke-WebRequest -Uri '%INSTURL%' -OutFile '%TMPZIP%'"
-
-if errorlevel 1 (
-    echo Errore durante il download.
-    pause
-    goto main
-)
-
-echo Creazione cartella...
-if not exist "%INSTDIR%" mkdir "%INSTDIR%"
-
-echo Estrazione archivio...
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-"Expand-Archive -Path '%TMPZIP%' -DestinationPath '%INSTDIR%' -Force"
-
-if errorlevel 1 (
-    echo Errore durante l'estrazione.
-    pause
-    goto main
-)
-
-echo Configurazione PATH...
-
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$path=[Environment]::GetEnvironmentVariable('Path','Machine'); if($path -notlike '*%INSTDIR%*'){ [Environment]::SetEnvironmentVariable('Path',$path + ';%INSTDIR%','Machine') }"
-
-:: Aggiorna PATH della sessione corrente
-set "PATH=%PATH%;%INSTDIR%"
-
-del "%TMPZIP%" >nul 2>&1
-
-echo.
-echo Installazione completata!
-echo Riavvia il terminale per usare il comando.
-pause
-goto main
