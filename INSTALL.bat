@@ -19,7 +19,7 @@ echo Comandi:
 echo.
 
 powershell -Command "Write-Host '- nim install' -ForegroundColor Yellow"
-echo    Installa (di default per questo utente)
+echo    Installa
 
 powershell -Command "Write-Host '- nim escape' -ForegroundColor Yellow"
 echo    Esci
