@@ -1,0 +1,1 @@
+Qui ci sono i pacchetti installati con NPI.
