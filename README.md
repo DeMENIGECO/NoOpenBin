@@ -26,6 +26,8 @@ Comandi:
 
 - nim install
    Installa
+- nim iv <versione>
+   Installa una versione specifica
 - nim escape
    Esci
 
