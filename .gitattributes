@@ -1,0 +1,5 @@
+# Esclude questo file dagli archivi generati da GitHub Releases e git archive
+.gitattributes export-ignore
+
+# Esclude la cartella npi/ dagli archivi esportati
+npi/ export-ignore
