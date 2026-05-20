@@ -38,6 +38,24 @@ Installate con `nim install`.
 
 Poi, quando avete finito l'installazione, digitate `nim escape`.
 
+<details>
+  <summary>Risoluzione dei problemi del comando d'installazione</summary>
+
+- **`irm` bloccato dall'antivirus:**  
+  Alcuni antivirus possono bloccare `Invoke-RestMethod` o l'esecuzione automatica di file scaricati da Internet.  
+  Prova a scaricare manualmente `INSTALL.bat` oppure aggiungi una eccezione temporanea nell'antivirus.
+
+- **Comando `irm` o `cmd` non trovato:**  
+  Probabilmente stai usando una versione vecchia di PowerShell oppure un terminale limitato.  
+  Verifica che PowerShell sia installato correttamente ed esegui:
+
+  ```powershell
+  powershell -v
+  ```
+
+  Poi verifica che stai eseguendo il comando da una PowerShell.
+</details>
+
 Facciamo un test veloce, digitate nel terminale:
 
 ```bash
